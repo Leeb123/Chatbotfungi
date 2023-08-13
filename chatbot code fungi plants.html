@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mushroom and Plant Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #chat-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        #chat-log {
+            height: 300px;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Mushroom and Plant Chatbot</h1>
+    <div id="chat-container">
+        <div id="chat-log"></div>
+        <input type="text" id="user-input" placeholder="Type your question...">
+        <button id="send-button">Send</button>
+    </div>
+
+    <script>
+        const chatLog = document.getElementById('chat-log');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+
+        sendButton.addEventListener('click', () => {
+            const userQuestion = userInput.value;
+            appendToChatLog('You: ' + userQuestion);
+            
+            // Process user input and generate a response from the chatbot
+            const botResponse = generateBotResponse(userQuestion);
+            appendToChatLog('Chatbot: ' + botResponse);
+
+            // Clear the input field
+            userInput.value = '';
+
+            // Scroll to the bottom of the chat log
+            chatLog.scrollTop = chatLog.scrollHeight;
+        });
+
+        function appendToChatLog(message) {
+            const newMessage = document.createElement('p');
+            newMessage.textContent = message;
+            chatLog.appendChild(newMessage);
+        }
+
+        function generateBotResponse(userQuestion) {
+            userQuestion = userQuestion.toLowerCase();
+
+            // Handle different types of questions and provide corresponding responses
+            if (userQuestion.includes('mushroom')) {
+                return 'Mushrooms are fungi that come in various shapes and sizes.';
+            } else if (userQuestion.includes('plant')) {
+                return 'Plants are living organisms that usually have leaves, stems, and roots.';
+            } else if (userQuestion.includes('edible mushrooms')) {
+                return 'Some edible mushrooms include chanterelles, morels, and oyster mushrooms.';
+            } else if (userQuestion.includes('poisonous mushrooms')) {
+                return 'Avoid consuming wild mushrooms unless you are an expert, as some can be toxic.';
+            } else if (userQuestion.includes('photosynthesis')) {
+                return 'Photosynthesis is the process by which plants convert sunlight into energy.';
+            } else {
+                return 'I\'m sorry, I don\'t have information on that topic.';
+            }
+        }
+    </script>
+</body>
+</html>
